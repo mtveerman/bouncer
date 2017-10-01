@@ -38,6 +38,13 @@ class Models
     protected static $tables = [];
 
     /**
+     * The model scoping instance.
+     *
+     * @var \Silber\Bouncer\Database\Scope
+     */
+    protected static $scope;
+
+    /**
      * Set the model to be used for abilities.
      *
      * @param  string  $model
@@ -115,6 +122,20 @@ class Models
     public static function prefix()
     {
         return static::$prefix;
+    }
+
+    /**
+     * Get the model scoping instance.
+     *
+     * @return \Silber\Bouncer\Database\Scope
+     */
+    public static function scope()
+    {
+        if (is_null(static::$scope)) {
+            static::$scope = new Scope;
+        }
+
+        return static::$scope;
     }
 
     /**
